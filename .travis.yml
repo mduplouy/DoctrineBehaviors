@@ -29,6 +29,8 @@ jobs:
                 - DB_PASSWD=root
                 - DB_MEMORY=false
             php: '7.2'
+            install:
+                - composer update --prefer-lowest
             before_script:
                 - psql -c 'CREATE DATABASE orm_behaviors_test' -U postgres
                 # see https://www.guru99.com/postgresql-create-alter-add-user.html step 5)
@@ -46,12 +48,6 @@ jobs:
             <<: *POSTGRES_JOB
             php: '7.4'
 
-        -
-            <<: *POSTGRES_JOB
-            php: '7.2'
-            install:
-                - composer update --prefer-lowest
-
         # MySQL
         - &MYSQL_JOB
             stage: test
@@ -67,6 +63,8 @@ jobs:
                 - DB_PASSWD=""
                 - DB_MEMORY=false
             php: '7.2'
+            install:
+                - composer update --prefer-lowest
             before_script:
                 - mysql -e 'create database IF NOT EXISTS orm_behaviors_test' -uroot
             script:
@@ -79,12 +77,6 @@ jobs:
         -
             <<: *MYSQL_JOB
             php: '7.4'
-
-        -
-            <<: *MYSQL_JOB
-            php: '7.2'
-            install:
-                - composer update --prefer-lowest
 
     allow_failures:
         - name: "Rector"
