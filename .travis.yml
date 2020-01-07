@@ -1,4 +1,5 @@
 dist: xenial # see https://travis-ci.community/t/postgresql-fails-to-start-unrecognized-operating-system/4558
+
 language: php
 
 install:
@@ -84,35 +85,6 @@ jobs:
             php: '7.2'
             install:
                 - composer update --prefer-lowest
-
-        -
-            stage: test
-            name: "Lint PHP"
-            php: '7.2'
-            script:
-                - vendor/bin/parallel-lint src tests -e php,phpt
-
-        -
-            stage: test
-            name: "Coding Standards"
-            php: '7.2'
-            script:
-                - composer check-cs
-
-
-        -
-            stage: test
-            name: "Static Analysis"
-            php: '7.2'
-            script:
-                - composer phpstan
-
-        -
-            stage: test
-            name: "Rector"
-            php: '7.2'
-            script:
-                - composer rector
 
     allow_failures:
         - name: "Rector"
