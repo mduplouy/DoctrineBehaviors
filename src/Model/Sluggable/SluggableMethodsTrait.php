@@ -43,7 +43,7 @@ trait SluggableMethodsTrait
 
     public function shouldGenerateUniqueSlugs(): bool
     {
-        return false;
+        return true;
     }
 
     private function getSlugDelimiter(): string
@@ -53,7 +53,7 @@ trait SluggableMethodsTrait
 
     private function shouldRegenerateSlugOnUpdate(): bool
     {
-        return true;
+        return false;
     }
 
     /**
